@@ -1,0 +1,71 @@
+<form
+  [formGroup]="addForm"
+  (ngSubmit)="onSubmit(addForm.value)"
+  class="mx-auto max-w-max text-sm bg-slate-300 text-center mb-3 p-1"
+>
+  <h2 class="text-xl mb-1">Create user similarly</h2>
+
+  <div class="mb-1">
+    <label for="first-name">First Name: </label>
+    <input
+      id="first-name"
+      type="text"
+      formControlName="firstName"
+      class="w-100 border-3"
+      placeholder="Homer"
+    />
+  </div>
+
+  <div class="mb-1">
+    <label for="first-name">Last Name: </label>
+    <input
+      id="last-name"
+      type="text"
+      formControlName="lastName"
+      class="w-100"
+      placeholder="Simpson"
+    />
+  </div>
+
+  <div class="mb-1 flex flex-row gap-1">
+    <label for="first-name">Email: </label>
+    <input
+      id="email"
+      type="text"
+      formControlName="email"
+      class="w-full"
+      placeholder="homer.s@gmail.com"
+    />
+  </div>
+
+  <div class="mb-1 flex flex-row gap-1">
+    <label for="first-name">Age: </label>
+    <input
+      id="age"
+      type="number"
+      formControlName="age"
+      class="w-full"
+      placeholder="52"
+    />
+  </div>
+
+  <div class="mb-1 flex flex-row gap-1">
+    <label for="first-name">Gender: </label>
+    <input
+      id="gender"
+      type="text"
+      formControlName="gender"
+      class="w-full"
+      placeholder="male"
+    />
+  </div>
+
+  <p class="mb-1">Form Status: {{ addForm.status }}</p>
+  <button
+    type="submit"
+    [disabled]="!addForm.valid"
+    class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded"
+  >
+    Submit
+  </button>
+</form>

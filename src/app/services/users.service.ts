@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IUser } from '../models/users.model';
+import { IСreatedUser, IUser } from '../models/users.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +15,12 @@ export class UsersService {
     return this.http.get<IUser[]>(this.baseUrl);
   }
 
-  createUser(user: IUser) {
-    return this.http.post<IUser>(this.baseUrl, user);
+  createUser(user: IСreatedUser) {
+    return this.http.post<IСreatedUser>(this.baseUrl, user);
   }
 
   updateUser(user: IUser) {
-    return this.http.put<IUser>(this.baseUrl + '/' + user.id, user);
+    return this.http.put<IUser>(this.baseUrl + '/' + user._id, user);
   }
 
   deleteUser(id: string) {
