@@ -10,24 +10,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="border p-1 break-all">Leanne</td>
-      <td class="border p-1 break-all">Graham</td>
-      <td class="border p-1 break-all">Sincere@april.biz</td>
-      <td class="border p-1">52</td>
-      <td class="border p-1">female</td>
-      <td class="border p-1">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white p-0.5 m-0.5 rounded"
-        >
-          edit
-        </button>
-        <button
-          class="bg-red-500 hover:bg-red-700 text-white p-0.5 m-0.5 rounded"
-        >
-          delete
-        </button>
-      </td>
-    </tr>
+    <app-user-table-item
+      class="contents"
+      *ngFor="let user of users; let i = index"
+      [user]="user"
+    ></app-user-table-item>
   </tbody>
 </table>
