@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
-import { IСreatedUser } from '../../models/users.model';
+import { ServerDataChangesService } from 'src/app/services/server-data-changes.service';
 
 @Component({
   selector: 'app-add-user',
@@ -9,7 +9,11 @@ import { IСreatedUser } from '../../models/users.model';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
-  constructor(private fb: FormBuilder, private usersService: UsersService) {}
+  constructor(
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private serverDataChangesService: ServerDataChangesService
+  ) {}
 
   addForm = this.fb.group({
     firstName: ['Homer', Validators.required],
@@ -23,9 +27,10 @@ export class AddUserComponent implements OnInit {
 
   onSubmit(user: any): void {
     if (this.addForm.valid) {
-      this.usersService
-        .createUser(user)
-        .subscribe((res) => console.log('POST user to the server:', res));
+      this.usersService.createUser(user).subscribe((res) => {
+        console.log('POST user to the server:', res);
+        this.serverDataChangesService.changeCount(1);
+      });
     }
   }
 }
