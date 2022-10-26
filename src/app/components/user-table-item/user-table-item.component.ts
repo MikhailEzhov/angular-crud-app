@@ -11,6 +11,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserTableItemComponent implements OnInit {
   @Input() user: IUser;
 
+  editUser = false;
+
   constructor(
     private usersService: UsersService,
     private serverDataChangesService: ServerDataChangesService
@@ -21,6 +23,14 @@ export class UserTableItemComponent implements OnInit {
   deleteUser(id: string): void {
     this.usersService.deleteUser(id).subscribe((res) => {
       console.log('DELETE user on server under id:', id);
+      this.serverDataChangesService.changeCount(1);
+    });
+  }
+
+  changeUser(): void {
+    const { _id, ...user } = this.user;
+    this.usersService.updateUser(_id, user).subscribe((res) => {
+      console.log('PUT user on the server:', user);
       this.serverDataChangesService.changeCount(1);
     });
   }

@@ -1,14 +1,68 @@
 <tr>
-  <td class="border p-1 break-all">{{ user.firstName }}</td>
-  <td class="border p-1 break-all">{{ user.lastName }}</td>
-  <td class="border p-1 break-all">{{ user.email }}</td>
-  <td class="border p-1">{{ user.age }}</td>
-  <td class="border p-1">{{ user.gender }}</td>
-  <td class="border p-0.5">
+  <td class="border p-0.5 pl-1 break-all align-top">
+    <textarea
+      [(ngModel)]="user.firstName"
+      [readonly]="!editUser"
+      [ngClass]="{
+        'textarea ': editUser,
+        'textarea-off ': !editUser
+      }"
+    ></textarea>
+  </td>
+  <td class="border p-0.5 break-all align-top">
+    <textarea
+      [(ngModel)]="user.lastName"
+      [readonly]="!editUser"
+      [ngClass]="{
+        'textarea ': editUser,
+        'textarea-off ': !editUser
+      }"
+    ></textarea>
+  </td>
+  <td class="border p-0.5 break-all align-top">
+    <textarea
+      [(ngModel)]="user.email"
+      [readonly]="!editUser"
+      [ngClass]="{
+        'textarea ': editUser,
+        'textarea-off ': !editUser
+      }"
+    ></textarea>
+  </td>
+  <td class="border p-0.5 break-all align-top">
+    <textarea
+      [(ngModel)]="user.age"
+      [readonly]="!editUser"
+      [ngClass]="{
+        'textarea ': editUser,
+        'textarea-off ': !editUser
+      }"
+    ></textarea>
+  </td>
+  <td class="border p-0.5 break-all align-top">
+    <textarea
+      [(ngModel)]="user.gender"
+      [readonly]="!editUser"
+      [ngClass]="{
+        'textarea ': editUser,
+        'textarea-off ': !editUser
+      }"
+    ></textarea>
+  </td>
+  <td class="border p-0.5 align-top">
     <button
+      *ngIf="!editUser"
       class="bg-blue-500 hover:bg-blue-700 text-white p-0.5 m-0.5 rounded"
+      (click)="editUser = true"
     >
       edit
+    </button>
+    <button
+      *ngIf="editUser"
+      class="bg-green-500 hover:bg-green-700 text-white p-0.5 m-0.5 rounded"
+      (click)="changeUser()"
+    >
+      save
     </button>
     <button
       class="bg-red-500 hover:bg-red-700 text-white p-0.5 m-0.5 rounded"

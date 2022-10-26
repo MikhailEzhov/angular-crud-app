@@ -6,7 +6,7 @@ import { IСreatedUser, IUser } from '../models/users.model';
   providedIn: 'root',
 })
 export class UsersService {
-  urlKey: string = '60b8d79a530e4ed7bbfe3c50f699a221';
+  urlKey: string = '6d998a11c27d4ddc8e1a81f6f412ece2';
   baseUrl: string = `https://crudcrud.com/api/${this.urlKey}/user`;
 
   constructor(private http: HttpClient) {}
@@ -19,8 +19,8 @@ export class UsersService {
     return this.http.post<IСreatedUser>(this.baseUrl, user);
   }
 
-  updateUser(user: IUser) {
-    return this.http.put<IUser>(this.baseUrl + '/' + user._id, user);
+  updateUser(id: string, user: IСreatedUser) {
+    return this.http.put<IUser>(this.baseUrl + '/' + id, user);
   }
 
   deleteUser(id: string) {
