@@ -1,12 +1,11 @@
-.textarea {
+.input {
   width: 100%;
   text-align: center;
 }
 
-.textarea-off {
+.input-off {
   width: 100%;
   text-align: center;
   background-color: inherit;
   outline: none;
-  resize: none;
 }

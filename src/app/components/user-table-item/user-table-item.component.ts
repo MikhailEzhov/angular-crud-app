@@ -22,7 +22,6 @@ export class UserTableItemComponent implements OnInit {
 
   deleteUser(id: string): void {
     this.usersService.deleteUser(id).subscribe((res) => {
-      console.log('DELETE user on server under id:', id);
       this.serverDataChangesService.changeCount(1);
     });
   }
@@ -30,7 +29,6 @@ export class UserTableItemComponent implements OnInit {
   changeUser(): void {
     const { _id, ...user } = this.user;
     this.usersService.updateUser(_id, user).subscribe((res) => {
-      console.log('PUT user on the server:', user);
       this.serverDataChangesService.changeCount(1);
     });
   }

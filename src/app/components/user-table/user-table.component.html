@@ -1,18 +1,18 @@
-<table class="table-auto mx-auto text-sm bg-slate-300 text-center mb-3">
+<table class="table-auto mx-auto text-sm bg-slate-300 mb-3">
   <thead>
     <tr>
-      <th class="border p-1">First name</th>
-      <th class="border p-1">Last name</th>
-      <th class="border p-1">Email</th>
-      <th class="border p-1 break-all">Age</th>
-      <th class="border p-1 break-all">Gender</th>
-      <th class="border p-1 break-all">Actions</th>
+      <th class="border p-1 min-w-[150px]">First name</th>
+      <th class="border p-1 min-w-[150px]">Last name</th>
+      <th class="border p-1 min-w-[150px]">Email</th>
+      <th class="border p-1 min-w-[50px]">Age</th>
+      <th class="border p-1">Gender</th>
+      <th class="border p-1">Actions</th>
     </tr>
   </thead>
   <tbody>
     <app-user-table-item
       class="contents"
-      *ngFor="let user of users; let i = index"
+      *ngFor="let user of users"
       [user]="user"
     ></app-user-table-item>
   </tbody>
