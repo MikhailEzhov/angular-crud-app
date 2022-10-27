@@ -28,6 +28,7 @@ export class AddUserComponent implements OnInit {
   onSubmit(user: any): void {
     if (this.addForm.valid) {
       this.usersService.createUser(user).subscribe((res) => {
+        this.addForm.reset();
         this.serverDataChangesService.changeCount(1);
       });
     }
