@@ -12,7 +12,7 @@
   <tbody>
     <app-user-table-item
       class="contents"
-      *ngFor="let user of users"
+      *ngFor="let user of users | async"
       [user]="user"
     ></app-user-table-item>
   </tbody>

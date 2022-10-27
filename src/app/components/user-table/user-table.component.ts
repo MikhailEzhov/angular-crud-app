@@ -1,36 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { ServerDataChangesService } from 'src/app/services/server-data-changes.service';
-import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/models/users.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css'],
 })
-export class UserTableComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
-  public users: IUser[] = [];
+export class UserTableComponent implements OnInit {
+  public users: BehaviorSubject<IUser[]>;
 
-  constructor(
-    private usersService: UsersService,
-    private serverDataChangesService: ServerDataChangesService
-  ) {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe((users) => {
-      this.users = users;
-    });
-    this.subscription = this.serverDataChangesService.count$.subscribe(
-      (res) => {
-        this.ngOnDestroy();
-        this.ngOnInit();
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.usersService.getUsers();
+    this.users = this.usersService.users$;
   }
 }

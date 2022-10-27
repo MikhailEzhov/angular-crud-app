@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IUser } from 'src/app/models/users.model';
-import { ServerDataChangesService } from 'src/app/services/server-data-changes.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -8,28 +7,19 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './user-table-item.component.html',
   styleUrls: ['./user-table-item.component.css'],
 })
-export class UserTableItemComponent implements OnInit {
+export class UserTableItemComponent {
   @Input() user: IUser;
 
-  editUser = false;
+  public editUser = false;
 
-  constructor(
-    private usersService: UsersService,
-    private serverDataChangesService: ServerDataChangesService
-  ) {}
-
-  ngOnInit(): void {}
+  constructor(private usersService: UsersService) {}
 
   deleteUser(id: string): void {
-    this.usersService.deleteUser(id).subscribe((res) => {
-      this.serverDataChangesService.changeCount(1);
-    });
+    this.usersService.deleteUser(id);
   }
 
   changeUser(): void {
     const { _id, ...user } = this.user;
-    this.usersService.updateUser(_id, user).subscribe((res) => {
-      this.serverDataChangesService.changeCount(1);
-    });
+    this.usersService.updateUser(_id, user);
   }
 }

@@ -1,29 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IСreatedUser, IUser } from '../models/users.model';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  urlKey: string = '6d998a11c27d4ddc8e1a81f6f412ece2';
-  baseUrl: string = `https://crudcrud.com/api/${this.urlKey}/user`;
+  private urlKey: string = '4a27df962e0d47d3bf8f066f1b914e9c';
+  private baseUrl: string = `https://crudcrud.com/api/${this.urlKey}/user`;
+
+  public users$ = new BehaviorSubject<IUser[]>([]);
 
   constructor(private http: HttpClient) {}
 
   getUsers() {
-    return this.http.get<IUser[]>(this.baseUrl);
+    this.http.get<IUser[]>(this.baseUrl).subscribe((res) => {
+      this.users$.next(res);
+    });
   }
 
   createUser(user: IСreatedUser) {
-    return this.http.post<IСreatedUser>(this.baseUrl, user);
+    return this.http.post<IСreatedUser>(this.baseUrl, user).pipe(
+      tap(() => {
+        this.getUsers();
+      })
+    );
   }
 
   updateUser(id: string, user: IСreatedUser) {
-    return this.http.put<IUser>(this.baseUrl + '/' + id, user);
+    return this.http
+      .put<IСreatedUser>(this.baseUrl + '/' + id, user)
+      .subscribe((res) => {
+        this.getUsers();
+      });
   }
 
   deleteUser(id: string) {
-    return this.http.delete(this.baseUrl + '/' + id);
+    return this.http.delete(this.baseUrl + '/' + id).subscribe((res) => {
+      this.getUsers();
+    });
   }
 }
