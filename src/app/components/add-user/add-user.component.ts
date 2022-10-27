@@ -18,7 +18,7 @@ export class AddUserComponent implements OnInit {
   addForm = this.fb.group({
     firstName: ['Homer', Validators.required],
     lastName: ['Simpson', Validators.required],
-    email: ['homer.s@gmail.com', Validators.required],
+    email: ['homer.s@gmail.com', [Validators.required, Validators.email]],
     age: [52, Validators.required],
     gender: ['male', Validators.required],
   });
@@ -28,7 +28,6 @@ export class AddUserComponent implements OnInit {
   onSubmit(user: any): void {
     if (this.addForm.valid) {
       this.usersService.createUser(user).subscribe((res) => {
-        console.log('POST user to the server:', res);
         this.serverDataChangesService.changeCount(1);
       });
     }
